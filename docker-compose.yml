@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: crypto_dwh_postgres
+    environment:
+      POSTGRES_DB: crypto_dwh
+      POSTGRES_USER: crypto_user
+      POSTGRES_PASSWORD: crypto_pass
+    ports:
+      - "5433:5432"
+    volumes:
+      - crypto_dwh_pgdata:/var/lib/postgresql/data
+      - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+
+volumes:
+  crypto_dwh_pgdata:
