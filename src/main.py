@@ -47,7 +47,7 @@ def save_klines(symbol: str, interval: str, klines: list):
         if cur.rowcount == 1:
             inserted += 1
 
-    conn.comit()
+    conn.commit()
     cur.close()
     conn.close()
 
