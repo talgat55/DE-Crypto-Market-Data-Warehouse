@@ -1,6 +1,7 @@
 from datetime import datetime
 from db import get_connection
 from extract import fetch_klines
+from transform import load_fact_price_ohlcv
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
 INTERVAL = "1h"
@@ -60,7 +61,8 @@ def main():
         klines = fetch_klines(symbol, INTERVAL, limit=100)
         inserted = save_klines(symbol, INTERVAL, klines)
 
-        print(f"{symbol}: inserted {inserted}  rows")
+    affected = load_fact_price_ohlcv()
+    print(f"fact_price_ohlcv affected rows: {affected}")
 
 if __name__ == "__main__":
     main()
