@@ -2,6 +2,8 @@ from datetime import datetime
 from db import get_connection
 from extract import fetch_klines
 from transform import load_fact_price_ohlcv
+from marts import build_mart_top_movers, build_mart_coin_hourly
+from quality import run_quality_checks
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
 INTERVAL = "1h"
@@ -63,6 +65,20 @@ def main():
 
     affected = load_fact_price_ohlcv()
     print(f"fact_price_ohlcv affected rows: {affected}")
+
+    affected = load_fact_price_ohlcv()
+    print(f"fact_price_ohlcv affected rows: {affected}")
+
+    hourly_rows = build_mart_coin_hourly()
+    print(f"mart_coin_hourly affected rows: {hourly_rows}")
+
+    top_movers_rows = build_mart_top_movers()
+    print(f"mart_top_movers affected rows: {top_movers_rows}")
+
+    checks = run_quality_checks()
+    print("Quantity checks:")
+    for check in checks:
+        print(f"{check['check']}: {check['status']}")
 
 if __name__ == "__main__":
     main()
