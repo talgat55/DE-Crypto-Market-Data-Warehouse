@@ -57,3 +57,14 @@ CREATE TABLE IF NOT EXISTS mart_top_movers (
     PRIMARY KEY (symbol, interval, open_time)
 );
 
+CREATE TABLE IF NOT EXISTS pipeline_runs (
+    id BIGSERIAL PRIMARY KEY,
+    started_at TIMESTAMP NOT NULL,
+    finished_at TIMESTAMP,
+    status TEXT NOT NULL,
+    raw_inserted_rows INT DEFAULT 0,
+    fact_affected_row INT DEFAULT 0,
+    mart_hourly_row INT DEFAULT 0,
+    mart_top_movers_rows INT DEFAULT 0,
+    error_message TEXT
+);

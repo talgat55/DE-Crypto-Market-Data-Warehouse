@@ -4,6 +4,7 @@ from extract import fetch_klines
 from transform import load_fact_price_ohlcv
 from marts import build_mart_top_movers, build_mart_coin_hourly
 from quality import run_quality_checks
+from pipeline_runs import start_pipeline_run, finish_pipeline_run
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
 INTERVAL = "1h"
@@ -57,28 +58,70 @@ def save_klines(symbol: str, interval: str, klines: list):
     return inserted
 
 def main():
-    for symbol in SYMBOLS:
-        print(f"Fetching {symbol}...")
+    run_id = start_pipeline_run()
+    total_raw_inserted = 0
+    fact_rows = 0
+    hourly_rows = 0
+    top_movers_rows = 0
 
-        klines = fetch_klines(symbol, INTERVAL, limit=100)
-        inserted = save_klines(symbol, INTERVAL, klines)
+    try:
+        for symbol in SYMBOLS:
+            print(f"Fetching {symbol}...")
 
-    affected = load_fact_price_ohlcv()
-    print(f"fact_price_ohlcv affected rows: {affected}")
+            klines = fetch_klines(symbol, INTERVAL, limit=100)
+            inserted = save_klines(symbol, INTERVAL, klines)
+            total_raw_inserted += inserted
 
-    affected = load_fact_price_ohlcv()
-    print(f"fact_price_ohlcv affected rows: {affected}")
+            print(f"{symbol}: inserted {inserted} rows")
 
-    hourly_rows = build_mart_coin_hourly()
-    print(f"mart_coin_hourly affected rows: {hourly_rows}")
+        fact_rows = load_fact_price_ohlcv()
+        print(f"fact_price_ohlcv affected rows: {fact_rows}")
 
-    top_movers_rows = build_mart_top_movers()
-    print(f"mart_top_movers affected rows: {top_movers_rows}")
+        hourly_rows = build_mart_coin_hourly()
+        print(f"mart_coin_hourly affected rows: {hourly_rows}")
 
-    checks = run_quality_checks()
-    print("Quantity checks:")
-    for check in checks:
-        print(f"{check['check']}: {check['status']}")
+        top_movers_rows = build_mart_top_movers()
+        print(f"mart_top_movers affected rows: {top_movers_rows}")
+
+        checks = run_quality_checks()
+
+        print("Quality checks:")
+        for check in checks:
+            print(f"{check['check']}: {check['status']}")
+
+        failed_checks = [c for c in checks if c["status"] == "failed"]
+
+        if failed_checks:
+            finish_pipeline_run(
+                run_id=run_id,
+                status="failed",
+                raw_inserted_rows=total_raw_inserted,
+                fact_affected_rows=fact_rows,
+                mart_hourly_rows=hourly_rows,
+                mart_top_movers_rows=top_movers_rows,
+                error_message=f"Failed checks: {failed_checks}"
+            )
+        else:
+            finish_pipeline_run(
+                run_id=run_id,
+                status="success",
+                raw_inserted_rows=total_raw_inserted,
+                fact_affected_rows=fact_rows,
+                mart_hourly_rows=hourly_rows,
+                mart_top_movers_rows=top_movers_rows
+            )
+
+    except Exception as e:
+        finish_pipeline_run(
+            run_id=run_id,
+            status="failed",
+            raw_inserted_rows=total_raw_inserted,
+            fact_affected_rows=fact_rows,
+            mart_hourly_rows=hourly_rows,
+            mart_top_movers_rows=top_movers_rows,
+            error_message=str(e)
+        )
+        raise
 
 if __name__ == "__main__":
     main()
