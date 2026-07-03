@@ -1,14 +1,12 @@
 from db import get_connection
+from sql_loader import load_sql
+
 
 def get_last_open_time_ms(symbol: str, interval: str):
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        SELECT MAX(open_time)
-        FROM raw_klines
-        WHERE symbol = %s AND interval = %s;
-    """, (symbol, interval))
+    cur.execute(load_sql("get_last_open_time.sql"), (symbol, interval))
 
     last_open_time = cur.fetchone()[0]
 
@@ -19,4 +17,3 @@ def get_last_open_time_ms(symbol: str, interval: str):
         return None
 
     return int(last_open_time.timestamp() * 1000)
-

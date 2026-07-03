@@ -7,6 +7,7 @@ from logger import get_logger
 from marts import build_mart_coin_hourly, build_mart_top_movers
 from quality import run_quality_checks
 from state import get_last_open_time_ms
+from sql_loader import load_sql
 from transform import load_fact_price_ohlcv
 
 logger = get_logger(__name__)
@@ -20,27 +21,10 @@ def save_klines(symbol: str, interval: str, klines: list):
     conn = get_connection()
     cur = conn.cursor()
 
-    sql = """
-        INSERT INTO raw_klines (
-            symbol,
-            interval,
-            open_time,
-            open_price,
-            high_price,
-            low_price,
-            close_price,
-            volume,
-            close_time
-        )
-        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-        ON CONFLICT (symbol, interval, open_time)
-        DO NOTHING;
-    """
-
     inserted = 0
 
     for k in klines:
-        cur.execute(sql, (
+        cur.execute(load_sql("insert_raw_klines.sql"), (
             symbol,
             interval,
             ms_to_datetime(k[0]),
@@ -66,11 +50,7 @@ def start_pipeline_run():
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        INSERT INTO pipeline_runs (started_at, status)
-        VALUES (%s, %s)
-        RETURNING id
-    """, (datetime.now(), "running"))
+    cur.execute(load_sql("insert_pipeline_run.sql"), (datetime.now(), "running"))
 
     run_id = cur.fetchone()[0]
 
@@ -93,18 +73,7 @@ def finish_pipeline_run(
     conn = get_connection()
     cur = conn.cursor()
 
-    cur.execute("""
-        UPDATE pipeline_runs
-        SET
-            finished_at = %s,
-            status = %s,
-            raw_inserted_rows = %s,
-            fact_affected_row = %s,
-            mart_hourly_row = %s,
-            mart_top_movers_rows = %s,
-            error_message = %s
-        WHERE id = %s;
-    """, (
+    cur.execute(load_sql("update_pipeline_run.sql"), (
         datetime.now(),
         status,
         raw_inserted_rows,

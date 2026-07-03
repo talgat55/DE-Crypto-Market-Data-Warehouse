@@ -1,4 +1,14 @@
 from db import get_connection
+from sql_loader import load_sql
+
+QUALITY_CHECKS = [
+    "raw_klines_empty",
+    "fact_price_ohlcv_empty",
+    "null_close_price",
+    "negative_volume",
+    "duplicate_fact_rows",
+]
+
 
 def run_quality_checks():
     conn = get_connection()
@@ -6,38 +16,8 @@ def run_quality_checks():
 
     checks = []
 
-    queries = {
-        "raw_klines_empty": """
-            SELECT COUNT(*) = 0
-            FROM raw_klines;
-        """,
-        "fact_price_ohlcv_empty": """
-            SELECT COUNT(*) = 0
-            FROM fact_price_ohlcv;
-        """,
-        "null_close_price": """
-            SELECT COUNT(*) > 0
-            FROM fact_price_ohlcv
-            WHERE volume < 0;
-        """,
-        "negative_volume": """
-            SELECT COUNT(*) > 0
-            FROM fact_price_ohlcv
-            WHERE close_price IS NULL
-        """,
-        "duplicate_fact_rows": """
-            SELECT COUNT(*) > 0
-            FROM (
-                SELECT symbol, interval, open_time, COUNT(*) 
-                FROM fact_price_ohlcv
-                GROUP BY symbol, interval, open_time
-                HAVING COUNT(*) > 1
-            ) t
-        """
-    }
-
-    for check_name, sql in queries.items():
-        cur.execute(sql)
+    for check_name in QUALITY_CHECKS:
+        cur.execute(load_sql(f"quality/{check_name}.sql"))
         failed = cur.fetchone()[0]
 
         checks.append({
