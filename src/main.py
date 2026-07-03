@@ -1,15 +1,14 @@
 from datetime import datetime
+
+from config import BINANCE_KLINES_LIMIT, KLINE_INTERVAL, KLINE_SYMBOLS
 from db import get_connection
 from extract import fetch_klines
-from transform import load_fact_price_ohlcv
-from marts import build_mart_top_movers, build_mart_coin_hourly
-from quality import run_quality_checks
-from pipeline_runs import start_pipeline_run, finish_pipeline_run
-from state import get_last_open_time_ms
 from logger import get_logger
-
-SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
-INTERVAL = "1h"
+from marts import build_mart_coin_hourly, build_mart_top_movers
+from pipeline_runs import finish_pipeline_run, start_pipeline_run
+from quality import run_quality_checks
+from state import get_last_open_time_ms
+from transform import load_fact_price_ohlcv
 
 logger = get_logger(__name__)
 
@@ -70,10 +69,10 @@ def main():
     top_movers_rows = 0
 
     try:
-        for symbol in SYMBOLS:
+        for symbol in KLINE_SYMBOLS:
             logger.info(f"Fetching {symbol}...")
 
-            last_open_time_ms = get_last_open_time_ms(symbol, INTERVAL)
+            last_open_time_ms = get_last_open_time_ms(symbol, KLINE_INTERVAL)
 
             if last_open_time_ms is None:
                 start_time_ms = None
@@ -82,11 +81,11 @@ def main():
 
             klines = fetch_klines(
                 symbol=symbol,
-                interval=INTERVAL,
-                limit=100,
+                interval=KLINE_INTERVAL,
+                limit=BINANCE_KLINES_LIMIT,
                 start_time_ms=start_time_ms
             )
-            inserted = save_klines(symbol, INTERVAL, klines)
+            inserted = save_klines(symbol, KLINE_INTERVAL, klines)
             total_raw_inserted += inserted
 
             logger.info(f"{symbol}: inserted {inserted} rows")
