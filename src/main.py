@@ -6,9 +6,12 @@ from marts import build_mart_top_movers, build_mart_coin_hourly
 from quality import run_quality_checks
 from pipeline_runs import start_pipeline_run, finish_pipeline_run
 from state import get_last_open_time_ms
+from logger import get_logger
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
 INTERVAL = "1h"
+
+logger = get_logger(__name__)
 
 def ms_to_datetime(ms: int):
     return datetime.fromtimestamp(ms / 1000)
@@ -68,7 +71,7 @@ def main():
 
     try:
         for symbol in SYMBOLS:
-            print(f"Fetching {symbol}...")
+            logger.info(f"Fetching {symbol}...")
 
             last_open_time_ms = get_last_open_time_ms(symbol, INTERVAL)
 
@@ -86,22 +89,21 @@ def main():
             inserted = save_klines(symbol, INTERVAL, klines)
             total_raw_inserted += inserted
 
-            print(f"{symbol}: inserted {inserted} rows")
+            logger.info(f"{symbol}: inserted {inserted} rows")
 
         fact_rows = load_fact_price_ohlcv()
-        print(f"fact_price_ohlcv affected rows: {fact_rows}")
+        logger.info(f"fact_price_ohlcv affected rows: {fact_rows}")
 
         hourly_rows = build_mart_coin_hourly()
-        print(f"mart_coin_hourly affected rows: {hourly_rows}")
+        logger.info(f"fact_price_ohlcv affected rows: {hourly_rows}")
 
         top_movers_rows = build_mart_top_movers()
-        print(f"mart_top_movers affected rows: {top_movers_rows}")
-
+        logger.info(f"mart_top_movers affected rows: {top_movers_rows}")
         checks = run_quality_checks()
 
-        print("Quality checks:")
+        logger.info("Quality checks:")
         for check in checks:
-            print(f"{check['check']}: {check['status']}")
+            logger.info(f"{check['check']}: {check['status']}")
 
         failed_checks = [c for c in checks if c["status"] == "failed"]
 
@@ -126,6 +128,7 @@ def main():
             )
 
     except Exception as e:
+        logger.exception("Pipeline failed")
         finish_pipeline_run(
             run_id=run_id,
             status="failed",
