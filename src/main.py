@@ -5,6 +5,7 @@ from transform import load_fact_price_ohlcv
 from marts import build_mart_top_movers, build_mart_coin_hourly
 from quality import run_quality_checks
 from pipeline_runs import start_pipeline_run, finish_pipeline_run
+from state import get_last_open_time_ms
 
 SYMBOLS = ["BTCUSDT", "ETHUSDT", "SOLUSDT"]
 INTERVAL = "1h"
@@ -36,6 +37,7 @@ def save_klines(symbol: str, interval: str, klines: list):
     inserted = 0
 
     for k in klines:
+
         cur.execute(sql, (
             symbol,
             interval,
@@ -68,7 +70,19 @@ def main():
         for symbol in SYMBOLS:
             print(f"Fetching {symbol}...")
 
-            klines = fetch_klines(symbol, INTERVAL, limit=100)
+            last_open_time_ms = get_last_open_time_ms(symbol, INTERVAL)
+
+            if last_open_time_ms is None:
+                start_time_ms = None
+            else:
+                start_time_ms = last_open_time_ms + 1
+
+            klines = fetch_klines(
+                symbol=symbol,
+                interval=INTERVAL,
+                limit=100,
+                start_time_ms=start_time_ms
+            )
             inserted = save_klines(symbol, INTERVAL, klines)
             total_raw_inserted += inserted
 
