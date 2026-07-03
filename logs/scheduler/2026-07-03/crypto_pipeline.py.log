@@ -1,0 +1,153 @@
+[2026-07-03T10:34:59.966+0000] {processor.py:161} INFO - Started process (PID=160) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:34:59.967+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:34:59.969+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:34:59.969+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:35:00.036+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:35:00.033+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:35:00.037+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:35:00.052+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.090 seconds
+[2026-07-03T10:35:30.282+0000] {processor.py:161} INFO - Started process (PID=165) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:35:30.284+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:35:30.287+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:35:30.286+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:35:30.351+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:35:30.348+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:35:30.352+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:35:30.372+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.098 seconds
+[2026-07-03T10:36:00.555+0000] {processor.py:161} INFO - Started process (PID=170) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:36:00.565+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:36:00.576+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:36:00.575+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:36:00.623+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:36:00.621+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:36:00.624+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:36:00.646+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.098 seconds
+[2026-07-03T10:36:30.935+0000] {processor.py:161} INFO - Started process (PID=175) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:36:30.937+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:36:30.938+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:36:30.938+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:36:30.963+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:36:30.961+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:36:30.964+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:36:30.976+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.044 seconds
+[2026-07-03T10:37:01.237+0000] {processor.py:161} INFO - Started process (PID=180) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:37:01.239+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:37:01.241+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:37:01.240+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:37:01.268+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:37:01.267+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:37:01.269+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:37:01.280+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.048 seconds
+[2026-07-03T10:37:31.587+0000] {processor.py:161} INFO - Started process (PID=185) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:37:31.589+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:37:31.592+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:37:31.591+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:37:31.623+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:37:31.621+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:37:31.624+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:37:31.643+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.066 seconds
+[2026-07-03T10:38:01.900+0000] {processor.py:161} INFO - Started process (PID=190) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:38:01.903+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:38:01.905+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:38:01.905+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:38:01.931+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:38:01.928+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:38:01.932+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:38:01.946+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.051 seconds
+[2026-07-03T10:38:32.177+0000] {processor.py:161} INFO - Started process (PID=195) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:38:32.179+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:38:32.182+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:38:32.182+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:38:32.214+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:38:32.212+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:38:32.215+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:38:32.236+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.067 seconds
+[2026-07-03T10:39:02.518+0000] {processor.py:161} INFO - Started process (PID=200) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:02.521+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:39:02.524+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:02.524+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:02.556+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:02.554+0000] {dagbag.py:355} ERROR - Failed to import: /opt/airflow/dags/crypto_pipeline.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/dagbag.py", line 351, in parse
+    loader.exec_module(new_module)
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/opt/airflow/dags/crypto_pipeline.py", line 10, in <module>
+    "retry_delay": timedelta(minute=2)
+                   ^^^^^^^^^^^^^^^^^^^
+TypeError: 'minute' is an invalid keyword argument for __new__()
+[2026-07-03T10:39:02.559+0000] {processor.py:842} WARNING - No viable dags retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:02.575+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.066 seconds
+[2026-07-03T10:39:13.658+0000] {processor.py:161} INFO - Started process (PID=205) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:13.660+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:39:13.662+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:13.662+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:13.720+0000] {processor.py:840} INFO - DAG(s) 'crypto_market_pipeline' retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:13.884+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:13.884+0000] {override.py:1829} INFO - Created Permission View: can edit on DAG:crypto_market_pipeline
+[2026-07-03T10:39:13.894+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:13.893+0000] {override.py:1829} INFO - Created Permission View: can read on DAG:crypto_market_pipeline
+[2026-07-03T10:39:13.898+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:13.898+0000] {override.py:1829} INFO - Created Permission View: can delete on DAG:crypto_market_pipeline
+[2026-07-03T10:39:13.899+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:13.899+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2026-07-03T10:39:13.909+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:13.909+0000] {dag.py:3118} INFO - Creating ORM DAG for crypto_market_pipeline
+[2026-07-03T10:39:13.927+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:13.926+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_market_pipeline to 2026-07-03 09:00:00+00:00, run_after=2026-07-03 10:00:00+00:00
+[2026-07-03T10:39:13.950+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.297 seconds
+[2026-07-03T10:39:44.050+0000] {processor.py:161} INFO - Started process (PID=210) to work on /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:44.053+0000] {processor.py:830} INFO - Processing file /opt/airflow/dags/crypto_pipeline.py for tasks to queue
+[2026-07-03T10:39:44.056+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:44.055+0000] {dagbag.py:545} INFO - Filling up the DagBag from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:44.093+0000] {processor.py:840} INFO - DAG(s) 'crypto_market_pipeline' retrieved from /opt/airflow/dags/crypto_pipeline.py
+[2026-07-03T10:39:44.115+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:44.115+0000] {dag.py:3096} INFO - Sync 1 DAGs
+[2026-07-03T10:39:44.133+0000] {logging_mixin.py:188} INFO - [2026-07-03T10:39:44.133+0000] {dag.py:3954} INFO - Setting next_dagrun for crypto_market_pipeline to 2026-07-03 09:00:00+00:00, run_after=2026-07-03 10:00:00+00:00
+[2026-07-03T10:39:44.148+0000] {processor.py:183} INFO - Processing /opt/airflow/dags/crypto_pipeline.py took 0.108 seconds

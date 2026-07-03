@@ -11,6 +11,91 @@ services:
     volumes:
       - crypto_dwh_pgdata:/var/lib/postgresql/data
       - ./sql/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+  airflow_postgres:
+    image: postgres:15
+    container_name: airflow_postgres
+    environment:
+      POSTGRES_DB: airflow
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+    volumes:
+      - airflow_pgdata:/var/lib/postgresql/data
+
+  airflow_init:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    container_name: airflow_init
+    depends_on:
+      - airflow_postgres
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow_postgres:5432/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    command: >
+      bash -c "airflow db migrate &&
+      airflow users create
+      --username admin
+      --password admin
+      --firstname Admin
+      --lastname User
+      --role Admin
+      --email admin@example.com"
+
+  airflow_webserver:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    container_name: airflow_webserver
+    depends_on:
+      - airflow_init
+      - postgres
+    ports:
+      - "8080:8080"
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow_postgres:5432/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+
+      PYTHONPATH: /opt/airflow/src
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: crypto_dwh
+      DB_USER: crypto_user
+      DB_PASSWORD: crypto_pass
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./src:/opt/airflow/src
+      - ./sql:/opt/airflow/sql
+      - ./logs:/opt/airflow/logs
+    command: airflow webserver
+
+  airflow_scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile.airflow
+    container_name: airflow_scheduler
+    depends_on:
+      - airflow_init
+      - postgres
+    environment:
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow_postgres:5432/airflow
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+
+      PYTHONPATH: /opt/airflow/src
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: crypto_dwh
+      DB_USER: crypto_user
+      DB_PASSWORD: crypto_pass
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./src:/opt/airflow/src
+      - ./sql:/opt/airflow/sql
+      - ./logs:/opt/airflow/logs
+    command: airflow scheduler
 
 volumes:
   crypto_dwh_pgdata:
+  airflow_pgdata:
