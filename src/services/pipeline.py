@@ -1,5 +1,7 @@
 from datetime import datetime
 
+from psycopg2.extras import execute_values
+
 from config import BINANCE_KLINES_LIMIT, KLINE_INTERVAL, KLINE_SYMBOLS
 from db import get_connection
 from extract import fetch_klines
@@ -18,13 +20,14 @@ def ms_to_datetime(ms: int):
 
 
 def save_klines(symbol: str, interval: str, klines: list):
+    if not klines:
+        return 0
+
     conn = get_connection()
     cur = conn.cursor()
 
-    inserted = 0
-
-    for k in klines:
-        cur.execute(load_sql("insert_raw_klines.sql"), (
+    rows = [
+        (
             symbol,
             interval,
             ms_to_datetime(k[0]),
@@ -34,10 +37,12 @@ def save_klines(symbol: str, interval: str, klines: list):
             k[4],
             k[5],
             ms_to_datetime(k[6]),
-        ))
+        )
+        for k in klines
+    ]
 
-        if cur.rowcount == 1:
-            inserted += 1
+    execute_values(cur, load_sql("insert_raw_klines.sql"), rows)
+    inserted = cur.rowcount
 
     conn.commit()
     cur.close()

@@ -9,6 +9,6 @@ INSERT INTO raw_klines (
     volume,
     close_time
 )
-VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+VALUES %s
 ON CONFLICT (symbol, interval, open_time)
 DO NOTHING;
