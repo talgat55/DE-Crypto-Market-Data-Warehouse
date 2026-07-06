@@ -2,7 +2,12 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.operators.python import PythonOperator
-from services.pipeline import run_pipeline
+from services.pipeline import (
+    extract_raw,
+    transform_fact,
+    build_marts,
+    quality_checks
+)
 
 default_args = {
     "owner": "user",
@@ -19,7 +24,25 @@ with DAG(
     catchup=False,
     tags=["crypto", "etl", "data-engineering"]
 ) as dag:
-    run_crypto_pipeline = PythonOperator(
-        task_id="run_crypto_pipeline",
-        python_callable=run_pipeline
+
+    extract_raw_task = PythonOperator(
+        task_id="extract_raw",
+        python_callable=extract_raw
     )
+
+    transform_fact_task = PythonOperator(
+        task_id="transform_fact",
+        python_callable=transform_fact
+    )
+
+    build_marts_task = PythonOperator(
+        task_id="build_marts",
+        python_callable=build_marts
+    )
+
+    quality_checks_task = PythonOperator(
+        task_id="quality_checks",
+        python_callable=quality_checks
+    )
+
+    extract_raw_task >> transform_fact_task >> build_marts_task >> quality_checks_task

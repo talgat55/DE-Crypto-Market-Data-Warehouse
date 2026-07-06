@@ -1,0 +1,20 @@
+[2026-07-06T15:49:36.248+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-06T15:49:36.272+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_market_pipeline.build_marts manual__2026-07-06T15:49:29.072196+00:00 [queued]>
+[2026-07-06T15:49:36.276+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_market_pipeline.build_marts manual__2026-07-06T15:49:29.072196+00:00 [queued]>
+[2026-07-06T15:49:36.277+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-07-06T15:49:36.283+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): build_marts> on 2026-07-06 15:49:29.072196+00:00
+[2026-07-06T15:49:36.290+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=471) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-07-06T15:49:36.289+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_market_pipeline', 'build_marts', 'manual__2026-07-06T15:49:29.072196+00:00', '--job-id', '17', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmpp7lq8d3w']
+[2026-07-06T15:49:36.291+0000] {standard_task_runner.py:63} INFO - Started process 472 to run task
+[2026-07-06T15:49:36.291+0000] {standard_task_runner.py:91} INFO - Job 17: Subtask build_marts
+[2026-07-06T15:49:36.369+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_market_pipeline.build_marts manual__2026-07-06T15:49:29.072196+00:00 [running]> on host 0f39d26fbe9c
+[2026-07-06T15:49:36.664+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='user' AIRFLOW_CTX_DAG_ID='crypto_market_pipeline' AIRFLOW_CTX_TASK_ID='build_marts' AIRFLOW_CTX_EXECUTION_DATE='2026-07-06T15:49:29.072196+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2026-07-06T15:49:29.072196+00:00'
+[2026-07-06T15:49:36.672+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-06T15:49:36.799+0000] {pipeline.py:121} INFO - mart_coin_hourly affected rows: 732
+[2026-07-06T15:49:36.903+0000] {pipeline.py:124} INFO - mart_top_movers affected rows: 732
+[2026-07-06T15:49:36.910+0000] {python.py:237} INFO - Done. Returned value was: {'mart_coin_hourly': 732, 'mart_top_movers': 732}
+[2026-07-06T15:49:36.923+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-06T15:49:37.272+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_market_pipeline, task_id=build_marts, run_id=manual__2026-07-06T15:49:29.072196+00:00, execution_date=20260706T154929, start_date=20260706T154936, end_date=20260706T154937
+[2026-07-06T15:49:37.680+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-07-06T15:49:37.711+0000] {taskinstance.py:3498} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2026-07-06T15:49:37.712+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
