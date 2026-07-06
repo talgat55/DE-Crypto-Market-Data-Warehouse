@@ -1,0 +1,24 @@
+[2026-07-06T16:00:15.293+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2026-07-06T16:00:15.309+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_market_pipeline.quality_checks scheduled__2026-07-06T15:00:00+00:00 [queued]>
+[2026-07-06T16:00:15.312+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_market_pipeline.quality_checks scheduled__2026-07-06T15:00:00+00:00 [queued]>
+[2026-07-06T16:00:15.313+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2026-07-06T16:00:15.317+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): quality_checks> on 2026-07-06 15:00:00+00:00
+[2026-07-06T16:00:15.323+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=586) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2026-07-06T16:00:15.322+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'crypto_market_pipeline', 'quality_checks', 'scheduled__2026-07-06T15:00:00+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/crypto_pipeline.py', '--cfg-path', '/tmp/tmp1m5vp26c']
+[2026-07-06T16:00:15.324+0000] {standard_task_runner.py:63} INFO - Started process 587 to run task
+[2026-07-06T16:00:15.324+0000] {standard_task_runner.py:91} INFO - Job 22: Subtask quality_checks
+[2026-07-06T16:00:15.351+0000] {task_command.py:426} INFO - Running <TaskInstance: crypto_market_pipeline.quality_checks scheduled__2026-07-06T15:00:00+00:00 [running]> on host 0f39d26fbe9c
+[2026-07-06T16:00:15.385+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='user' AIRFLOW_CTX_DAG_ID='crypto_market_pipeline' AIRFLOW_CTX_TASK_ID='quality_checks' AIRFLOW_CTX_EXECUTION_DATE='2026-07-06T15:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2026-07-06T15:00:00+00:00'
+[2026-07-06T16:00:15.386+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2026-07-06T16:00:15.409+0000] {pipeline.py:134} INFO - Quality checks:
+[2026-07-06T16:00:15.409+0000] {pipeline.py:136} INFO - raw_klines_empty: passed
+[2026-07-06T16:00:15.410+0000] {pipeline.py:136} INFO - fact_price_ohlcv_empty: passed
+[2026-07-06T16:00:15.410+0000] {pipeline.py:136} INFO - null_close_price: passed
+[2026-07-06T16:00:15.411+0000] {pipeline.py:136} INFO - negative_volume: passed
+[2026-07-06T16:00:15.412+0000] {pipeline.py:136} INFO - duplicate_fact_rows: passed
+[2026-07-06T16:00:15.412+0000] {python.py:237} INFO - Done. Returned value was: None
+[2026-07-06T16:00:15.413+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2026-07-06T16:00:15.418+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=crypto_market_pipeline, task_id=quality_checks, run_id=scheduled__2026-07-06T15:00:00+00:00, execution_date=20260706T150000, start_date=20260706T160015, end_date=20260706T160015
+[2026-07-06T16:00:15.457+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2026-07-06T16:00:15.467+0000] {taskinstance.py:3498} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2026-07-06T16:00:15.469+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
